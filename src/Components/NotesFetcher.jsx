@@ -1,50 +1,67 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 import './NotesFetcher.css'; // Import your CSS file
 
 const NotesFetcher = () => {
-  const [branch, setBranch] = useState('');
-  const [semester, setSemester] = useState('');
-  const [subject, setSubject] = useState('');
+  const [selectedBranch, setSelectedBranch] = useState('');
+  const [selectedSemester, setSSelectedSemester] = useState('');
+  const [selectedSubject, setSelectedSubject] = useState('');
   const [notesUrl, setNotesUrl] = useState('');
 
-  // Sample data for branches, semesters, and subjects
-  const branches = ['Computer', 'Electrical'];
-  const semesters = ['1', '2'];
-  const subjects = {
-    'Computer Science': ['Data Structures', 'Algorithms'],
+  // Sample data for branchesOptionsArr, semestersOptionsArr, and subjectsOptionsArr
+  const branchesOptionsArr = ['Computer', 'Electrical'];
+  const semestersOptionsArr = ['1', '2'];
+  const subjectsOptionsArr = {
+    Computer: ['Data Structures', 'Algorithms'],
     Electrical: ['Circuits', 'Electromagnetism']
   };
-  const GG= [
+  const assetJSON = [
     {
         branch: 'Computer',
-        semester: 1,
+        semester: [
+          {1: {url: 'https://drive.google.com/file/d/11m0tGZceOJt13Ud5vYJ7rn0CwQXbezDA/view?usp=drive_link'},
+          2: {url: 'https://drive.google.com/file/d/1n2YBAM_wtvOYZk-EQxnt8zNHOt8YDHPj/view?usp=drive_link'}}
+        ],
         subject: 'Data Structures',
-        url: ""
     },
     {
-        branch: 'Computer',
-        semester: 2,
-        subject: 'Data Structures',
-        url: ""
+      branch: 'Computer',
+      semester: [
+        {1: {url: 'https://drive.google.com/file/d/1YvPKbMkLE6a2EQrOOhTeOPPHNfe651gm/view?usp=drive_link'},
+        2: {url: 'https://drive.google.com/file/d/1c3puY9QslohHt_SESwl5N6nNNgpfjoYG/view?usp=drive_link'}}
+      ],
+      subject: 'Algorithms',
+    },
+    {
+        branch: 'Electrical',
+        semester: [
+          {1: {url: 'https://drive.google.com/file/d/1rzXwYdygYlJl-gFY_xwYMq452lprqlnU/view?usp=drive_link'},
+          2: {url: 'https://drive.google.com/file/d/1wMDnoiMupOSMFqhKH11F3-Fyp0SdKgFK/view?usp=drive_link'}}
+        ],
+        subject: 'Circuits',
+    },
+    {
+        branch: 'Electrical',
+        semester: [
+          {1: {url: 'https://drive.google.com/file/d/15_QndAh-4VNJIk1qhQs-_Ry-Ric7MrFK/view?usp=drive_link'},
+          2: {url: 'https://drive.google.com/file/d/1qE9g_cCmIMZcWv5-rEnblWa3HWJCv2Lo/view?usp=drive_link'}}
+        ],
+        subject: 'Electromagnetism',
     }
   ]
-  console.log(branch,semester,subject)
-  const handleClick = () =>{
-    // const mappedData = GG.map((item)=>{
-    //     if(item.branch == branches && item.branch == semesters && item.branch == subjects){
-    //         return item
-    //     }
-    // })
-    // console.log(mappedData)
-  }
 
-//   useEffect(() => {
-//     if (branch && semester && subject) {
-//       // Construct a URL for the Google Drive document
-//       const url = `https://drive.google.com/file/d/1ITzyLZBSVsUy2CL-GxqFXaoGVsflVfaW//${branch}-${semester}-${subject}/view?usp=sharing`;
-//       setNotesUrl(url);
-//     }
-//   }, [branch, semester, subject]);
+  const renderPreview = () =>{
+    if(selectedBranch === '' || selectedSemester === '' ||  selectedSubject ===''){
+      alert('please fill all details')
+    } else{
+      let url = ''
+      const mappedData = assetJSON.map((item)=>{
+          if(item.branch === selectedBranch && item.subject === selectedSubject){
+            return url += item.semester[0][selectedSemester].url
+          }
+      })
+      setNotesUrl(url)
+    }
+  }
 
   return (
     <div className="notes-fetcher-container">
@@ -53,12 +70,12 @@ const NotesFetcher = () => {
           <label htmlFor="branch">Branch</label>
           <select
             id="branch"
-            value={branch}
-            onChange={(e) => setBranch(e.target.value)}
+            value={selectedBranch}
+            onChange={(e) => setSelectedBranch(e.target.value)}
           >
             <option value="">Select Branch</option>
-            {branches.map((branch) => (
-              <option key={branch} value={branch}>{branch}</option>
+            {branchesOptionsArr.map((item) => (
+              <option key={item} value={item}>{item}</option>
             ))}
           </select>
         </div>
@@ -66,12 +83,12 @@ const NotesFetcher = () => {
           <label htmlFor="semester">Semester</label>
           <select
             id="semester"
-            value={semester}
-            onChange={(e) => setSemester(e.target.value)}
+            value={selectedSemester}
+            onChange={(e) => setSSelectedSemester(e.target.value)}
           >
             <option value="">Select Semester</option>
-            {semesters.map((semester) => (
-              <option key={semester} value={semester}>{semester}</option>
+            {semestersOptionsArr.map((item) => (
+              <option key={item} value={item}>{item}</option>
             ))}
           </select>
         </div>
@@ -79,17 +96,16 @@ const NotesFetcher = () => {
           <label htmlFor="subject">Subject</label>
           <select
             id="subject"
-            value={subject}
-            onChange={(e) => setSubject(e.target.value)}
-            disabled={!branch}
+            value={selectedSubject}
+            onChange={(e) => setSelectedSubject(e.target.value)}
           >
             <option value="">Select Subject</option>
-            {branch && subjects[branch].map((subject) => (
-              <option key={subject} value={subject}>{subject}</option>
+            {selectedBranch && subjectsOptionsArr[selectedBranch].map((item) => (
+              <option key={item} value={item}>{item}</option>
             ))}
           </select>
         </div>
-        <button onClick={handleClick}>Get Notes</button>
+        <button onClick={renderPreview}>Get Notes</button>
       </div>
       <div className="content">
         {notesUrl ? (

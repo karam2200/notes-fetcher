@@ -1,14 +1,16 @@
 .notes-fetcher-container {
     display: flex;
+    height: 880px;
     flex-direction: row;
     padding: 16px;
-    gap: 16px;
+    gap: 18px;
+    background-color: #101820FF;
   }
   
   /* Sidebar styling */
   .sidebar {
     flex: 1;
-    background-color: #f7f7f7;
+    background-color: #FEE715FF;
     padding: 16px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -16,13 +18,15 @@
   
   /* Form group styling */
   .form-group {
-    margin-bottom: 16px;
+    margin-bottom: 18px;
   }
   
   .form-group label {
     display: block;
     margin-bottom: 8px;
     font-weight: bold;
+    font-size: 20px;
+    color:  #101820FF;
   }
   
   .form-group select {
@@ -30,6 +34,7 @@
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    font-size: 18px;
   }
   
   /* Content area styling */
@@ -48,8 +53,26 @@
   
   /* Placeholder text styling */
   .placeholder {
-    font-size: 16px;
-    color: #888;
+    font-size: 25px;
+    color: #FEE715FF;
     text-align: center;
     margin-top: 20px;
+  }
+
+  button{
+    border: 3px solid;
+    border-radius: 5px;
+    height: 50px;
+    line-height: normal;
+    background-color: white;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    user-select: auto;
+    font-size: 16px;
+    padding: 0 6px;
+    padding-left: 12px;
+    :focus{
+        border: 3px solid;
+    }
   }
