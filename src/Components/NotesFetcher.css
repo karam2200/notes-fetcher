@@ -1,0 +1,55 @@
+.notes-fetcher-container {
+    display: flex;
+    flex-direction: row;
+    padding: 16px;
+    gap: 16px;
+  }
+  
+  /* Sidebar styling */
+  .sidebar {
+    flex: 1;
+    background-color: #f7f7f7;
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Form group styling */
+  .form-group {
+    margin-bottom: 16px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+  }
+  
+  .form-group select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  /* Content area styling */
+  .content {
+    flex: 3;
+  }
+  
+  /* Iframe styling */
+  .iframe {
+    width: 100%;
+    height: 600px;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Placeholder text styling */
+  .placeholder {
+    font-size: 16px;
+    color: #888;
+    text-align: center;
+    margin-top: 20px;
+  }
